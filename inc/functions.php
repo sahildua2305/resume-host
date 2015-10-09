@@ -6,3 +6,8 @@ function connect_server(){
 	return $connection;
 }
 
+function checkFileExtensionForImage($extension) {
+	if($extension == 'pdf')
+		return 1;
+	return 0;
+}

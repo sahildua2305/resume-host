@@ -24,9 +24,9 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-4"></div>
-						<?php if(isset($_SESSION['username'])) : ?>
+						<?php if(isset($_SESSION['resume_email'])) : ?>
 							<div class="col-lg-4">
-								<a href="profile.php?name=<?php echo $_SESSION['username'];?>" class="btn btn-lg btn-success">View profile</a>
+								<a href="upload.php" class="btn btn-lg btn-success">Upload resume</a>
 								<a href="logout.php" class="btn btn-lg btn-danger">Logout</a>
 							</div>
 						<?php else : ?>

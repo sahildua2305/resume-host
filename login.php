@@ -13,7 +13,7 @@
 			<div class="intro-body">
 				<div class="container text-center">
 					<div class="row">
-						<h1><a href="index.php">Pass.Me</a></h1>
+						<h1><a href="index.php">Resume-host</a></h1>
 						<h2>Login</h2>
 					</div>
 					<div class="row">
