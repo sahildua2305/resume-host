@@ -1,8 +1,11 @@
-<?php include 'inc/header.php';?>
+<?php
+	include 'inc/header.php'; 
+	require 'inc/functions.php';
+?>
 <?php
 	session_start();
-	if(isset($_SESSION['username'])){
-		header('Location: edit.php');
+	if(isset($_SESSION['resume_email'])){
+		header('Location: upload.php');
 	}
 ?>
 	<body>
@@ -18,8 +21,8 @@
 						<div class="col-lg-4">
 							<form role="form" action="" method="POST">
 								<div class="form-group">
-									<label for="username">Username</label>
-									<input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+									<label for="email">Email ID</label>
+									<input type="email" class="form-control" id="email" name="email" placeholder="Enter Email ID">
 								</div>
 								<div class="form-group">
 									<label for="password">Password</label>
@@ -36,16 +39,16 @@
 	</body>
 </html>
 <?php
-	$connection = mysqli_connect("69.65.10.232","mkstin_resume","+o{6Q,sJUgW^","mkstin_resume_host");
+	$connection = connect_server();
 	if(isset($_POST['login'])) {
-		$username= strip_tags($_POST['username']);
-		$password= md5(strip_tags($_POST['password']));
-		$query="select * from initial WHERE username='$username' and password='$password'";
-		$result=mysqli_query($connection, $query);
-		$num=mysqli_num_rows($result);
+		$email = strip_tags($_POST['email']);
+		$password = md5(strip_tags($_POST['password']));
+		$query = "select email from user_details WHERE email = '$email' and password = '$password'";
+		$result = mysqli_query($connection, $query);
+		$num = mysqli_num_rows($result);
 		if($num==1) {
-			$_SESSION['username']=$_POST['username'];
-			header('Location: edit.php');
+			$_SESSION['resume_email'] = $email;
+			header('Location: upload.php');
 		}
 		else
 			echo "Username/Password not matching!!";

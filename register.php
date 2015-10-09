@@ -1,11 +1,11 @@
 <?php
 	include 'inc/header.php'; 
-	include 'inc/functions.php';
+	require 'inc/functions.php';
 ?>
 <?php
 	session_start();
-	if(isset($_SESSION['resume_username'])){
-		// header('Location: index.php?name='.$_SESSION['username']);
+	if(isset($_SESSION['resume_email'])){
+		header('Location: upload.php');
 	}
 ?>
 	<body>
@@ -21,27 +21,23 @@
 						<div class="col-lg-4">
 							<form role="form" action="" method="POST">
 								<div class="form-group">
-									<label for="firstname">First Name</label>
+									<label for="firstname">First Name*</label>
 									<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name" required>
 								</div>
 								<div class="form-group">
 									<label for="lastname">Last Name</label>
-									<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name" required>
+									<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name">
 								</div>
 								<div class="form-group">
-									<label for="username">Username</label>
-									<input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+									<label for="email">Email ID*</label>
+									<input type="email" class="form-control" id="email" name="email" placeholder="Enter Email ID" required>
 								</div>
 								<div class="form-group">
-									<label for="email">Email ID</label>
-									<input type="email" class="form-control" id="emailid" name="emailid" placeholder="Enter Email ID" required>
-								</div>
-								<div class="form-group">
-									<label for="password">Password</label>
+									<label for="password">Password*</label>
 									<input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
 								</div>
 								<div class="form-group">
-									<label for="cpassword">Confirm Password</label>
+									<label for="cpassword">Confirm Password*</label>
 									<input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password" required>
 								</div>
 								<div class="form-group">
@@ -59,27 +55,21 @@
 	</body>
 </html>
 <?php
-	$connection = connect_server() or die("error");
+	$connection = connect_server();
 	if (isset($_POST['register']))
 	{
-		$username= strip_tags($_POST['username']);
-		$emailid= strip_tags($_POST['emailid']);
+		$email= strip_tags($_POST['email']);
 		$firstname= ucfirst(strip_tags($_POST['firstname']));
 		$lastname= ucfirst(strip_tags($_POST['lastname']));
 		$password= md5(strip_tags($_POST['password']));
 		$cpassword= md5(strip_tags($_POST['cpassword']));
 		
-		if($password!=$cpassword)
+		if($password != $cpassword)
 			echo "Password not matching<br>";
 		if($_POST['code'] != $_SESSION['captcha'])
 			echo "Please check that you have entered the correct security code!<br>";
 		
-		if(mysqli_query($connection, "insert into initial(username,emailid,firstname,lastname,password) values('$username','$emailid', '$firstname','$lastname' ,'$password')")){
-			$q = mysqli_query($connection, "SELECT id FROM initial WHERE username='$username'");
-			$r = mysqli_fetch_array($q);
-			$id = $r['id'];
-			mysqli_query($connection, "INSERT INTO profile(id) values('$id')");
-			mysqli_query($connection, "INSERT INTO hidden(id) values('$id')");
+		if(mysqli_query($connection, "insert into user_details(email,firstname,lastname,password) values('$email', '$firstname','$lastname' ,'$password')")){
 			header('Location: login.php');
 		}
 		else
