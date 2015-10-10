@@ -24,14 +24,22 @@
 				</div>
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
-						<?php if(isset($_SESSION['resume_email'])) : ?>
-							<a href="uploaded-resumes/<?php echo $_SESSION['resume_email'];?>.pdf" class="btn btn-lg btn-success" target="_blank">View resume</a>
+<?php
+	if(isset($_SESSION['resume_email'])){
+		if(file_exists("uploaded-resumes/". $_SESSION['resume_email'] . '.pdf')){
+			echo '<a href="uploaded-resumes/' . $_SESSION['resume_email']. '.pdf" class="btn btn-lg btn-success" target="_blank">View resume</a>';
+		}
+?>
 							<a href="upload.php" class="btn btn-lg btn-success">Upload resume</a>
 							<a href="logout.php" class="btn btn-lg btn-danger">Logout</a>
-						<?php else : ?>
+<?php
+	} else {
+?>
 							<a href="register.php" class="btn btn-lg btn-success">Register</a>
 							<a href="login.php" class="btn btn-lg btn-primary">Login</a>
-						<?php endif; ?>
+<?php
+	}
+?>
 					</div>
 				</div>
 			</div>

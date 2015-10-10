@@ -52,10 +52,13 @@
 						Upload a new resume</h2>
 					</div>
 <?php	
-	if(isset($success))	
+	if(isset($success))	{
 		echo '
 		<div class="alert alert-' . $panel_colors[$success] . ' alert-dismissible fade in" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>' . $message . '</div>';
+	}
+	
+	if($success != 1) {
 ?>
 					<div class="col-md-4 col-md-offset-4">
 						<form method="POST" enctype="multipart/form-data">
@@ -65,6 +68,9 @@
 							<button type="submit" name="save" class="btn btn-default btn-lg">Submit</button>
 						</form>
 					</div>
+<?php
+	}
+?>
 				</div>
 			</div>
 		</section>
