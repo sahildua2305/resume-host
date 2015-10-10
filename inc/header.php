@@ -36,6 +36,7 @@
 		
 		<script src="js/jquery-1.10.2.js"></script>
 		<script src="js/main.js"></script>
+		<script type="text/javascript" src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 		
 		<link rel="shortcut icon" href="img/Favicon1.png">
 	</head>

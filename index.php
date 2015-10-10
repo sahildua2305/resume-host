@@ -6,7 +6,7 @@
 		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header page-scroll">
-					<a class="navbar-brand" href="/index.php">
+					<a class="navbar-brand" href="index.php">
 						<i class="fa fa-play-circle"></i>  <span class="light">Resume</span>-Host
 					</a>
 				</div
