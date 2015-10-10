@@ -75,8 +75,9 @@
 				</div>
 			</div>
 		</section>
-	</body>
-</html>
+<?php
+	include 'inc/footer.inc.php';
+?>
 <?php
 	$connection = connect_server();
 	if (isset($_POST['register']))
