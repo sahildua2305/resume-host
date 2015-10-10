@@ -50,7 +50,7 @@
 		$num = mysqli_num_rows($result);
 		if($num == 1) {
 			$_SESSION['resume_email'] = $username;
-			header('Location: upload.php');
+			header('Location: index.php');
 		}
 		else
 			echo "Username/Password not matching!!";

@@ -23,28 +23,19 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-4"></div>
-						<?php if(isset($_SESSION['resume_email'])) : ?>
-							<div class="col-lg-4">
+						<div class="col-md-8 col-md-offset-2">
+							<?php if(isset($_SESSION['resume_email'])) : ?>
+								<a href="uploaded-resumes/<?php echo $_SESSION['resume_email'];?>.pdf" class="btn btn-lg btn-success" target="_blank">View resume</a>
 								<a href="upload.php" class="btn btn-lg btn-success">Upload resume</a>
 								<a href="logout.php" class="btn btn-lg btn-danger">Logout</a>
-							</div>
-						<?php else : ?>
-							<div class="col-lg-4">
+							<?php else : ?>
 								<a href="register.php" class="btn btn-lg btn-success">Register</a>
 								<a href="login.php" class="btn btn-lg btn-primary">Login</a>
-							</div>
-						<?php endif; ?>
-						<div class="col-lg-4"></div>
+							<?php endif; ?>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-		<script src="js/grayscale.js"></script>
-
 	</body>
 </html>
