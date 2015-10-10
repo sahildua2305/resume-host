@@ -11,9 +11,7 @@
 	<title>Resume-host</title>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
 	<link href="css/grayscale.css" rel="stylesheet">
 	
 	<link rel="shortcut icon" href="http://www.icon100.com/up/1994/128/folder_document2.png">
