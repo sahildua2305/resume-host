@@ -58,7 +58,7 @@
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>' . $message . '</div>';
 	}
 	
-	if($success != 1) {
+	if(@$success != 1) {
 ?>
 					<div class="col-md-4 col-md-offset-4">
 						<form method="POST" enctype="multipart/form-data">

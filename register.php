@@ -1,12 +1,68 @@
+
 <?php
 	include 'inc/header.php'; 
 	require 'inc/functions.php';
-?>
-<?php
+
+	require 'lib/g-captcha/recaptchalib.php';
+
+	// your secret key
+	$secret = "6LfOxxATAAAAAFHdmglB_w6CZqeMJ1KH82XrGxkH";
+
+	// empty response
+	$response = null;
+
+	// check secret key
+	$reCaptcha = new ReCaptcha($secret);
+
 	session_start();
+
 	if(isset($_SESSION['resume_email'])){
 		header('Location: upload.php');
 	}
+
+	$connection = connect_server();
+
+	if (isset($_POST['register'])){
+		$reload_flag = true;
+
+		$username 	= strip_tags($_POST['username']);
+		$firstname 	= ucfirst(strip_tags($_POST['firstname']));
+		$lastname 	= ucfirst(strip_tags($_POST['lastname']));
+		$password 	= md5(strip_tags($_POST['password']));
+		$cpassword 	= md5(strip_tags($_POST['cpassword']));
+
+		// if submitted check response
+		if ($_POST["g-recaptcha-response"]) {
+		    $response = $reCaptcha->verifyResponse(
+		        $_SERVER["REMOTE_ADDR"],
+		        $_POST["g-recaptcha-response"]
+		    );
+		}
+		
+		if($password != $cpassword){
+			$error_message = "Password not matching";
+		} else if($response != null && $response->success) {
+			$query = "INSERT INTO `user_details`(`username`, `firstname`, `lastname`, `password`) VALUES('$username', '$firstname','$lastname' ,'$password')";
+			$query_run = mysqli_query($connection, $query);
+			if($query_run){	
+				$reload_flag = false;
+			} else if(strpos(mysqli_error($connection), "Duplicate entry") !== false){
+				$error_message = 'Seems like someone already took this username, try something else';
+			} else {
+				$error_message = "Couldn't Register, Please Try Again!";
+			}
+		} else {
+			$error_message = "Sorry we only accept human resumes!";
+		}
+
+		if($reload_flag){
+			header('Location: register.php?error=' . $error_message);	
+		} else {
+			header('Location: login.php');
+		}
+		
+	}
+
 ?>
 	<body>
 		<section class="intro">
@@ -56,16 +112,11 @@
 								</div>
 								<div class="clearfix"></div>
 								<hr>
+
+								<center>
+									<div class="g-recaptcha" data-sitekey="6LfOxxATAAAAAC6malEAp6sx50gK4ICC5rW-4QKw"></div>
+								</center>
 								
-								<div class="form-group">
-									<div class="col-md-5">
-										<img src="captcha.php"/>
-									</div>
-									<div class="col-md-7">
-										<label>Enter the security code*</label>
-										<input type="text" class="form-control" id="code" name="code" placeholder="dude you need to prove you are a human" required>
-									</div>
-								</div>
 								<div class="clearfix"></div>
 								<hr>
 								<button type="submit" class="btn btn-default" name="register">Submit</button>
@@ -77,33 +128,4 @@
 		</section>
 <?php
 	include 'inc/footer.inc.php';
-?>
-<?php
-	$connection = connect_server();
-	if (isset($_POST['register']))
-	{
-		$username 	= strip_tags($_POST['username']);
-		$firstname 	= ucfirst(strip_tags($_POST['firstname']));
-		$lastname 	= ucfirst(strip_tags($_POST['lastname']));
-		$password 	= md5(strip_tags($_POST['password']));
-		$cpassword 	= md5(strip_tags($_POST['cpassword']));
-		
-		if($password != $cpassword){
-			$error_message = "Password not matching";
-		} else if($_POST['code'] != $_SESSION['captcha']){
-			$error_message = "Please check that you have entered the correct security code!";
-		} else {
-			$query = "INSERT INTO user_details(username,firstname,lastname,password) VALUES('$username', '$firstname','$lastname' ,'$password')";
-			$query_run = mysqli_query($connection, $query);
-			if($query_run){
-				header('Location: login.php');
-			} else{
-				if(strpos(mysqli_error($connection), "Duplicate entry") !== false)
-					$error_message = 'Seems like someone already took this username, try something else';
-				else 
-					$error_message = "Couldn't Register, Please Try Again!";
-			}
-		}
-		header('Location: register.php?error=' . $error_message);
-	}
 ?>
