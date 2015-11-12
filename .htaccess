@@ -1,0 +1,7 @@
+# Enable Rewriting
+RewriteEngine on
+ 
+# Rewrite view URLs
+#   Input:  /NAME
+#   Output: /view.php?username=NAME
+RewriteRule ^(\w+)/?$ view.php?username=$1
