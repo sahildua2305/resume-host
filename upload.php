@@ -1,6 +1,7 @@
 <?php
-	
+	ob_start();
 	session_start();
+
 	if(!isset($_SESSION['resume_email'])){
 		header('Location: login.php');
 	}

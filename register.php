@@ -1,20 +1,16 @@
-
 <?php
-	include 'inc/header.php'; 
 	require 'inc/functions.php';
-
 	require 'lib/g-captcha/recaptchalib.php';
+
+	ob_start();
+	session_start();
 
 	// your secret key
 	$secret = "6LfOxxATAAAAAFHdmglB_w6CZqeMJ1KH82XrGxkH";
-
 	// empty response
 	$response = null;
-
 	// check secret key
 	$reCaptcha = new ReCaptcha($secret);
-
-	session_start();
 
 	if(isset($_SESSION['resume_email'])){
 		header('Location: upload.php');
@@ -63,6 +59,7 @@
 		
 	}
 
+	include 'inc/header.php'; 
 ?>
 	<body>
 		<?php include 'inc/nav.inc.php'; ?>

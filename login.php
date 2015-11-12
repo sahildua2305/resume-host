@@ -1,9 +1,11 @@
 <?php
-	include 'inc/header.php'; 
-	require 'inc/functions.php';
-?>
-<?php
+	ob_start();
 	session_start();
+	
+	require 'inc/functions.php';
+	
+	include 'inc/header.php'; 
+	
 	if(isset($_SESSION['resume_email'])){
 		header('Location: upload.php');
 	}

@@ -1,6 +1,8 @@
-<?php include 'inc/header.php';?>
 <?php
+	ob_start();
 	session_start();
+	
+	include 'inc/header.php';
 ?>
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
