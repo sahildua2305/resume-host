@@ -65,11 +65,12 @@
 
 ?>
 	<body>
+		<?php include 'inc/nav.inc.php'; ?>
 		<section class="intro">
 			<div class="intro-body">
 				<div class="container text-center">
 					<div class="row">
-						<h1><a href="index.php">Resume-host</a></h1>
+						<!-- <h1><a href="index.php">Resume-host</a></h1> -->
 						<h2>Register</h2>
 					</div>
 <?php 

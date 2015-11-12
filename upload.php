@@ -37,11 +37,12 @@
 	include 'inc/header.php';
 ?>
 	<body>
+	<?php include 'inc/nav.inc.php'; ?>
 		<section class="intro">
 			<div class="intro-body">
 				<div class="container text-center">
 					<div class="row">
-						<h1><a href="index.php">Resume-host</a></h1>
+						<!-- <h1><a href="index.php">Resume-host</a></h1> -->
 <?php
 	if(file_exists("uploaded-resumes/". $_SESSION['resume_email'] . '.pdf')){
 		echo '<h2>You already have one resume uploaded<br><a href="uploaded-resumes/' . $_SESSION['resume_email'] . '.pdf" target="_blank">View your resume</a><br><br>or<br><br>';
