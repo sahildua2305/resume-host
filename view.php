@@ -37,6 +37,6 @@
 	</head>
 
 	<body>
-		<iframe src="uploaded-resumes/<?php echo $username;?>.pdf"> </iframe>
+		<iframe src="/uploaded-resumes/<?php echo $username;?>.pdf"> </iframe>
 	</body>
 </html>

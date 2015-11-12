@@ -22,7 +22,7 @@
 <?php
 	if(isset($_SESSION['resume_email'])){
 		if(file_exists("uploaded-resumes/". $_SESSION['resume_email'] . '.pdf')){
-			echo '<a href="uploaded-resumes/' . $_SESSION['resume_email']. '.pdf" class="btn btn-lg btn-success" target="_blank">View resume</a>';
+			echo '<a href="/' . $_SESSION['resume_email']. '" class="btn btn-lg btn-success" target="_blank">View resume</a>';
 		}
 ?>
 							<a href="upload.php" class="btn btn-lg btn-success">Upload resume</a>
