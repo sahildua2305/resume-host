@@ -26,24 +26,20 @@
 		$lastname 	= ucfirst(strip_tags($_POST['lastname']));
 		$password 	= md5(strip_tags($_POST['password']));
 		$cpassword 	= md5(strip_tags($_POST['cpassword']));
+		$email 		= strtolower(strip_tags($_POST['email']));
 
-		// if submitted check response
-		if ($_POST["g-recaptcha-response"]) {
-		    $response = $reCaptcha->verifyResponse(
-		        $_SERVER["REMOTE_ADDR"],
-		        $_POST["g-recaptcha-response"]
-		    );
-		}
+		if($_POST["g-recaptcha-response"])
+		    $response = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"],$_POST["g-recaptcha-response"]);
 		
 		if($password != $cpassword){
 			$error_message = "Password not matching";
 		} else if($response != null && $response->success) {
-			$query = "INSERT INTO `user_details`(`username`, `firstname`, `lastname`, `password`) VALUES('$username', '$firstname','$lastname' ,'$password')";
+			$query = "INSERT INTO `user_details`(`username`, `firstname`, `lastname`, `password`, `email`) VALUES('$username', '$firstname','$lastname' ,'$password', '$email')";
 			$query_run = mysqli_query($connection, $query);
 			if($query_run){	
 				$reload_flag = false;
 			} else if(strpos(mysqli_error($connection), "Duplicate entry") !== false){
-				$error_message = 'Seems like someone already took this username, try something else';
+				$error_message = 'Seems like someone already took this username or you have already registered with this email address, try something else';
 			} else {
 				$error_message = "Couldn't Register, Please Try Again!";
 			}
@@ -97,6 +93,10 @@
 								<div class="form-group">
 									<label>Username*</label>
 									<input type="text" class="form-control" name="username" placeholder="Now this is something important" required>
+								</div>
+								<div class="form-group">
+									<label>Email ID*</label>
+									<input type="email" class="form-control" name="email" placeholder="Even we don't like to spam" required>
 								</div>
 								<div class="form-group">
 									<div class="col-md-6">
